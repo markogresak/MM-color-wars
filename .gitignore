@@ -1,0 +1,35 @@
+# IntelliJ IDEA
+*.iml
+.idea/
+/out/
+.idea_modules/
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+.settings/
+.project
+*.launch
+.classpath
+
+# Java
+*.class
+*.jar
+
+# JVM logs
+hs_err_pid*
+
+# OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Linux
+*~
+.directory
