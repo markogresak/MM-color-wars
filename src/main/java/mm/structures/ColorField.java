@@ -1,5 +1,6 @@
 package mm.structures;
 
+import java.util.Random;
 
 /**
  * Square matrix (n x n) of m (colorCount) colors.
@@ -90,5 +91,14 @@ public class ColorField extends Matrix {
             neighbours[ii] = map[ii] == -1 ? -1 : a[map[ii]];
         }
         return neighbours;
+    }
+
+    public static ColorField GenerateField(int n, ColorPixel[] colors) {
+        ColorField cf = new ColorField(n, colors);
+        Random r = new Random();
+        for(int i = 0; i < cf.length; i++) {
+            cf.setElement1D(i, colors[r.nextInt(cf.colorCount)].getCode());
+        }
+        return cf;
     }
 }
