@@ -75,6 +75,14 @@ public class Matrix {
         a[indexOf(i, j)] = e;
     }
 
+    public int getElement1D(int i) {
+        return a[i];
+    }
+
+    public void setElement1D(int i, int e) {
+        a[i] = e;
+    }
+
     /**
      * @return - mm.structures.Matrix as 1D array.
      */
