@@ -1,6 +1,5 @@
 package mm.structures;
 
-import java.awt.*;
 
 /**
  * Square matrix (n x n) of m (colorCount) colors.
@@ -9,8 +8,7 @@ public class ColorField extends Matrix {
 
     private int n, colorCount;
     private int[][] neighbourMask;
-    private int[] colorMap;
-    private Color[] colors;
+    private ColorPixel[] colors;
 
     /**
      * Initialize mm.structures.ColorField as n x n matrix using given colors array as colors.
@@ -18,7 +16,7 @@ public class ColorField extends Matrix {
      * @param n      - Dimension of matrix.
      * @param colors - Colors to be used in field.
      */
-    public ColorField(int n, Color[] colors) {
+    public ColorField(int n, ColorPixel[] colors) {
         super(n);
         init(colors);
     }
@@ -29,24 +27,23 @@ public class ColorField extends Matrix {
      * @param array  - Array representing the field matrix.
      * @param colors - Colors to be used in field.
      */
-    private ColorField(int[][] array, Color[] colors) {
+    private ColorField(int[][] array, ColorPixel[] colors) {
         super(array);
-        colors = colors != null ? colors : new Color[0];
         init(colors);
+        colors = colors != null ? colors : new ColorPixel[0];
     }
 
     /**
      * Initialize colors array and color map (array of ints representing colors).
      * @param colors - Colors to be used in field.
      */
-    private void init(Color[] colors) {
+    private void init(ColorPixel[] colors) {
         this.n = super.n;
-        this.colorCount = colors.length;
         this.colors = colors;
-        // Init color map as values [0, colors.length - 1].
-        this.colorMap = new int[colorCount];
-        for (int i = 0; i < colorCount; i++) {
-            this.colorMap[i] = i;
+        this.colorCount = colors.length;
+        // Set codes for each color.
+        for(int i = 0; i < colorCount; i++) {
+            colors[i].setCode(i);
         }
         // Calculate neighbourMask array in advance, used to improve performance
         //  compared to calculating indices for every `getNeighbours` lookup.
@@ -67,6 +64,17 @@ public class ColorField extends Matrix {
         }
     }
 
+    public int getN() {
+        return n;
+    }
+
+    public int getColorCount() {
+        return colorCount;
+    }
+
+    public ColorPixel[] getColors() {
+        return colors;
+    }
 
     /**
      * Find values of neighbours of (i, j).
