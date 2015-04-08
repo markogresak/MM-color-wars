@@ -3,6 +3,7 @@
 .idea/
 /out/
 .idea_modules/
+target/
 
 # Eclipse
 .metadata
