@@ -19,7 +19,13 @@ public class ColorField extends Matrix {
      */
     public ColorField(int n, ColorPixel[] colors) {
         super(n);
-        init(colors);
+        init(colors, true);
+    }
+
+    private ColorField(int n, ColorPixel[] colors, int[][] neighbourMask) {
+        super(n);
+        this.neighbourMask = neighbourMask;
+        init(colors, false);
     }
 
     /**
@@ -30,15 +36,15 @@ public class ColorField extends Matrix {
      */
     private ColorField(int[][] array, ColorPixel[] colors) {
         super(array);
-        init(colors);
         colors = colors != null ? colors : new ColorPixel[0];
+        init(colors, true);
     }
 
     /**
      * Initialize colors array and color map (array of ints representing colors).
      * @param colors - Colors to be used in field.
      */
-    private void init(ColorPixel[] colors) {
+    private void init(ColorPixel[] colors, boolean calculateNeighbourMask) {
         this.n = super.n;
         this.colors = colors;
         this.colorCount = colors.length;
@@ -46,19 +52,21 @@ public class ColorField extends Matrix {
         for(int i = 0; i < colorCount; i++) {
             colors[i].setCode(i);
         }
-        // Calculate neighbourMask array in advance, used to improve performance
-        //  compared to calculating indices for every `getNeighbours` lookup.
-        neighbourMask = new int[super.length][8];
-        for (int i = 0, index = 0; i < m; i++) {
-            for (int j = 0; j < n; j++, index++) {
-                for (int ii = i - 1, ind = 0; ii <= i + 1; ii++) {
-                    for (int jj = j - 1; jj <= j + 1; jj++) {
-                        if (ii == i && jj == j) {
-                            continue;
+        if(calculateNeighbourMask) {
+            // Calculate neighbourMask array in advance, used to improve performance
+            //  compared to calculating indices for every `getNeighbours` lookup.
+            neighbourMask = new int[super.length][8];
+            for (int i = 0, index = 0; i < m; i++) {
+                for (int j = 0; j < n; j++, index++) {
+                    for (int ii = i - 1, ind = 0; ii <= i + 1; ii++) {
+                        for (int jj = j - 1; jj <= j + 1; jj++) {
+                            if (ii == i && jj == j) {
+                                continue;
+                            }
+                            neighbourMask[index][ind++] =
+                                    ((ii < 0 || ii >= m) || (jj < 0 || jj >= n))
+                                            ? -1 : indexOf(ii, jj);
                         }
-                        neighbourMask[index][ind++] =
-                                ((ii < 0 || ii >= m) || (jj < 0 || jj >= n))
-                                        ? -1 : indexOf(ii, jj);
                     }
                 }
             }
