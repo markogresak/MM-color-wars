@@ -19,7 +19,6 @@ public class FieldPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        long start = System.nanoTime();
         Rectangle bounds = g.getClipBounds();
         int n = field.getN();
         int elementSize = bounds.height / n;
@@ -30,6 +29,9 @@ public class FieldPanel extends JPanel {
                 g.fillRect(j * elementSize, i * elementSize, elementSize, elementSize);
             }
         }
-        System.out.printf("generiranje: %d\n", System.nanoTime() - start);
+    }
+
+    public void setField(ColorField field) {
+        this.field = field;
     }
 }
