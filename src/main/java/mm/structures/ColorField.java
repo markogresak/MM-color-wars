@@ -1,5 +1,6 @@
 package mm.structures;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -93,12 +94,21 @@ public class ColorField extends Matrix {
      * @return - Vector (1x8) of neighbours. If neighbour index is out of bounds, -1 is used as value.
      */
     public int[] getNeighbours(int i, int j) {
-        int[] map = neighbourMask[indexOf(i, j)];
+        return getNeighbours(indexOf(i, j));
+    }
+
+    public int[] getNeighbours(int i) {
+        int[] map = neighbourMask[i];
         int[] neighbours = new int[8];
+        int existsCount = 0;
         for (int ii = 0; ii < 8; ii++) {
-            neighbours[ii] = map[ii] == -1 ? -1 : a[map[ii]];
+            if(map[ii] != -1) {
+                neighbours[existsCount++] = a[map[ii]];
+            }
         }
-        return neighbours;
+        return Arrays.copyOf(neighbours, existsCount);
+    }
+        }
     }
 
     public static ColorField GenerateField(int n, ColorPixel[] colors) {
