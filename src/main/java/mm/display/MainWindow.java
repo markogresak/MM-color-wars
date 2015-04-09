@@ -11,20 +11,16 @@ public class MainWindow {
 
     private MainFrame window;
 
-    public MainWindow(ColorField field){
-
+    public MainWindow(ColorField field) {
         this.window = new MainFrame("Vojna Barv", field);
         window.setSize(500, 522);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
     }
 
-    public void repaint() {
-       window.repaint();
-    }
-
-    public void setField(ColorField field) {
+    public void updateField(final ColorField field) {
         window.setField(field);
+        window.repaint();
     }
 }
 

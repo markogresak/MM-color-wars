@@ -30,8 +30,7 @@ public class Main {
         long iterations = 0;
         while(!cf.isAllSame()) {
             cf = cf.updateNeighbours();
-            window.setField(cf);
-            window.repaint();
+            window.updateField(cf);
             iterations++;
         }
         long end = System.nanoTime() - allStart;
