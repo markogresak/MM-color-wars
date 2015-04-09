@@ -114,14 +114,8 @@ public class ColorField extends Matrix {
         final Random r = new Random();
 
         for (int i = 0; i < length; i++) {
-            final int finalI = i;
-            new Thread() {
-                @Override
-                public void run() {
-                    int[] neigbours = getNeighbours(finalI);
-                    cf.setElement(finalI, neigbours[r.nextInt(neigbours.length)]);
-                }
-            }.run();
+            int[] neigbours = getNeighbours(i);
+            cf.setElement(i, neigbours[r.nextInt(neigbours.length)]);
         }
 
         return cf;
