@@ -43,6 +43,7 @@ public class ColorField extends Matrix {
 
     /**
      * Initialize colors array and color map (array of ints representing colors).
+     *
      * @param colors - Colors to be used in field.
      */
     private void init(ColorPixel[] colors, boolean calculateNeighbourMask) {
@@ -50,10 +51,10 @@ public class ColorField extends Matrix {
         this.colors = colors;
         this.colorCount = colors.length;
         // Set codes for each color.
-        for(int i = 0; i < colorCount; i++) {
+        for (int i = 0; i < colorCount; i++) {
             colors[i].setCode(i);
         }
-        if(calculateNeighbourMask) {
+        if (calculateNeighbourMask) {
             // Calculate neighbourMask array in advance, used to improve performance
             //  compared to calculating indices for every `getNeighbours` lookup.
             neighbourMask = new int[super.length][8];
@@ -102,7 +103,7 @@ public class ColorField extends Matrix {
         int[] neighbours = new int[8];
         int existsCount = 0;
         for (int ii = 0; ii < 8; ii++) {
-            if(map[ii] != -1) {
+            if (map[ii] != -1) {
                 neighbours[existsCount++] = a[map[ii]];
             }
         }
@@ -114,8 +115,8 @@ public class ColorField extends Matrix {
         final Random r = new Random();
 
         for (int i = 0; i < length; i++) {
-            int[] neigbours = getNeighbours(i);
-            cf.setElement(i, neigbours[r.nextInt(neigbours.length)]);
+            final int[] neighbours = getNeighbours(i);
+            cf.setElement(i, neighbours[r.nextInt(neighbours.length)]);
         }
 
         return cf;
@@ -124,7 +125,7 @@ public class ColorField extends Matrix {
     public static ColorField GenerateField(int n, ColorPixel[] colors) {
         ColorField cf = new ColorField(n, colors);
         Random r = new Random();
-        for(int i = 0; i < cf.length; i++) {
+        for (int i = 0; i < cf.length; i++) {
             cf.setElement(i, colors[r.nextInt(cf.colorCount)].getCode());
         }
         return cf;
