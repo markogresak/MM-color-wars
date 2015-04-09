@@ -8,6 +8,8 @@ import java.util.Random;
  */
 public class ColorField extends Matrix {
 
+    private static final Random r = new Random(1000);
+
     private int n, colorCount;
     private int[][] neighbourMask;
     private int[] neighbourLengths;
