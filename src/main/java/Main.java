@@ -21,7 +21,7 @@ public class Main {
         };
 
         long start = System.nanoTime();
-        ColorField cf = ColorField.GenerateField(100, colors);
+        ColorField cf = ColorField.GenerateField(50, colors);
         System.out.printf("generiranje polja: %d\n", System.nanoTime() - start);
 
         MainWindow window = new MainWindow(cf);
