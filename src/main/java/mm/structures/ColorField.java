@@ -108,7 +108,17 @@ public class ColorField extends Matrix {
         }
         return Arrays.copyOf(neighbours, existsCount);
     }
+
+    public ColorField updateNeighbours() {
+        final ColorField cf = new ColorField(n, colors, neighbourMask);
+        final Random r = new Random();
+
+        for (int i = 0; i < length; i++) {
+                    int[] neigbours = getNeighbours(finalI);
+                    cf.setElement(finalI, neigbours[r.nextInt(neigbours.length)]);
         }
+
+        return cf;
     }
 
     public static ColorField GenerateField(int n, ColorPixel[] colors) {
