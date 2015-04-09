@@ -10,6 +10,7 @@ public class ColorField extends Matrix {
 
     private int n, colorCount;
     private int[][] neighbourMask;
+    private int[] neighbourLengths;
     private ColorPixel[] colors;
 
     /**
@@ -23,9 +24,10 @@ public class ColorField extends Matrix {
         init(colors, true);
     }
 
-    private ColorField(int n, ColorPixel[] colors, int[][] neighbourMask) {
+    private ColorField(int n, ColorPixel[] colors, int[][] neighbourMask, int[] neighbourLengths) {
         super(n);
         this.neighbourMask = neighbourMask;
+        this.neighbourLengths = neighbourLengths;
         init(colors, false);
     }
 
@@ -58,6 +60,7 @@ public class ColorField extends Matrix {
             // Calculate neighbourMask array in advance, used to improve performance
             //  compared to calculating indices for every `getNeighbours` lookup.
             neighbourMask = new int[super.length][8];
+            neighbourLengths = new int[super.length];
             for (int i = 0, index = 0; i < m; i++) {
                 for (int j = 0; j < n; j++, index++) {
                     int ind = 0;
@@ -69,6 +72,7 @@ public class ColorField extends Matrix {
                         }
                     }
                     neighbourMask[index] = Arrays.copyOf(neighbourMask[index], ind);
+                    neighbourLengths[index] = ind;
                 }
             }
         }
@@ -106,13 +110,24 @@ public class ColorField extends Matrix {
         return neighbours;
     }
 
+    private int[] getNextNeighbours() {
+        int[] nextNeighbours = new int[length];
+        for (int i = 0; i < length; i++) {
+            nextNeighbours[i] = r.nextInt(neighbourLengths[i]);
+        }
+        return nextNeighbours;
+    }
+
     public ColorField updateNeighbours() {
-        final ColorField cf = new ColorField(n, colors, neighbourMask);
         final Random r = new Random();
+        final ColorField cf = new ColorField(n, colors, neighbourMask, neighbourLengths);
+
+        int[] nextNeighbours = getNextNeighbours();
 
         for (int i = 0; i < length; i++) {
-            final int[] neighbours = getNeighbours(i);
-            cf.setElement(i, neighbours[r.nextInt(neighbours.length)]);
+//            final int[] neighbours = getNeighbours(i);
+//            cf.setElement(i, neighbours[r.nextInt(neighbours.length)]);
+            cf.setElement(i, getNeighbours(i)[nextNeighbours[i]]);
         }
 
         return cf;
