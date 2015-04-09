@@ -105,7 +105,7 @@ public class ColorField extends Matrix {
         ColorField cf = new ColorField(n, colors);
         Random r = new Random();
         for(int i = 0; i < cf.length; i++) {
-            cf.setElement1D(i, colors[r.nextInt(cf.colorCount)].getCode());
+            cf.setElement(i, colors[r.nextInt(cf.colorCount)].getCode());
         }
         return cf;
     }

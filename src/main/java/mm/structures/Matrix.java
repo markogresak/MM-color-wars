@@ -60,7 +60,7 @@ public class Matrix {
      * @param j - mm.structures.Matrix column.
      * @return - The element on location (i, j).
      */
-    public int getElement(int i, int j) {
+    public int getElement2D(int i, int j) {
         return a[indexOf(i, j)];
     }
 
@@ -71,15 +71,15 @@ public class Matrix {
      * @param j - mm.structures.Matrix column.
      * @param e - New element.
      */
-    public void setElement(int i, int j, int e) {
+    public void setElement2D(int i, int j, int e) {
         a[indexOf(i, j)] = e;
     }
 
-    public int getElement1D(int i) {
+    public int getElement(int i) {
         return a[i];
     }
 
-    public void setElement1D(int i, int e) {
+    public void setElement(int i, int e) {
         a[i] = e;
     }
 

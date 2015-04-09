@@ -25,7 +25,7 @@ public class FieldPanel extends JPanel {
         int elementSize = bounds.height / n;
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
-                ColorPixel pixel = colors[field.getElement(i, j)];
+                ColorPixel pixel = colors[field.getElement2D(i, j)];
                 g.setColor(pixel.getColor());
                 g.fillRect(j * elementSize, i * elementSize, elementSize, elementSize);
             }

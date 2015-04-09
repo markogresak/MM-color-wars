@@ -1,6 +1,5 @@
 package mm.structures;
 
-import mm.structures.Matrix;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +46,7 @@ public class MatrixTest {
                 // Test getter for each of 9 elements in matrixArray.
                 int v = matrixArray[i][j];
                 Assert.assertEquals(String.format("element at (%d, %d) should be %d", i, j, v),
-                        v, matrix.getElement(i, j));
+                        v, matrix.getElement2D(i, j));
             }
         }
 
@@ -58,7 +57,7 @@ public class MatrixTest {
         for (int i = 0; i < matrixArray.length; i++) {
             for (int j = 0; j < matrixArray[0].length; j++) {
                 // Set each of 9 elements in matrixArray to matrix.
-                matrix.setElement(i, j, matrixArray[i][j]);
+                matrix.setElement2D(i, j, matrixArray[i][j]);
             }
         }
         // Test if all 9 elements were added to correct position.
