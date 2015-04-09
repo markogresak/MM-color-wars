@@ -60,16 +60,15 @@ public class ColorField extends Matrix {
             neighbourMask = new int[super.length][8];
             for (int i = 0, index = 0; i < m; i++) {
                 for (int j = 0; j < n; j++, index++) {
-                    for (int ii = i - 1, ind = 0; ii <= i + 1; ii++) {
+                    int ind = 0;
+                    for (int ii = i - 1; ii <= i + 1; ii++) {
                         for (int jj = j - 1; jj <= j + 1; jj++) {
-                            if (ii == i && jj == j) {
-                                continue;
+                            if ((ii != i || jj != j) && (ii >= 0 && ii < m) && (jj >= 0 && jj < n)) {
+                                neighbourMask[index][ind++] = indexOf(ii, jj);
                             }
-                            neighbourMask[index][ind++] =
-                                    ((ii < 0 || ii >= m) || (jj < 0 || jj >= n))
-                                            ? -1 : indexOf(ii, jj);
                         }
                     }
+                    neighbourMask[index] = Arrays.copyOf(neighbourMask[index], ind);
                 }
             }
         }
@@ -92,7 +91,7 @@ public class ColorField extends Matrix {
      *
      * @param i - mm.structures.Matrix row.
      * @param j - mm.structures.Matrix column.
-     * @return - Vector (1x8) of neighbours. If neighbour index is out of bounds, -1 is used as value.
+     * @return - Vector (1xn) (n = [1, 8]) of existent neighbours.
      */
     public int[] getNeighbours(int i, int j) {
         return getNeighbours(indexOf(i, j));
@@ -100,14 +99,11 @@ public class ColorField extends Matrix {
 
     public int[] getNeighbours(int i) {
         int[] map = neighbourMask[i];
-        int[] neighbours = new int[8];
-        int existsCount = 0;
-        for (int ii = 0; ii < 8; ii++) {
-            if (map[ii] != -1) {
-                neighbours[existsCount++] = a[map[ii]];
-            }
+        int[] neighbours = new int[map.length];
+        for (int ii = 0; ii < map.length; ii++) {
+            neighbours[ii] = a[map[ii]];
         }
-        return Arrays.copyOf(neighbours, existsCount);
+        return neighbours;
     }
 
     public ColorField updateNeighbours() {
