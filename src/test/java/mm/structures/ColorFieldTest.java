@@ -24,7 +24,7 @@ public class ColorFieldTest {
         try {
             // Get declared constructor with expected argument int[][] and Color[].
             Constructor<ColorField> constructor = ColorField.class.
-                    getDeclaredConstructor(int[][].class, java.awt.Color[].class);
+                    getDeclaredConstructor(int[][].class, ColorPixel[].class);
             // Set accessibility of the constructor to true to be able to instantiate new matrix.
             constructor.setAccessible(true);
             // Instantiate new colorField using found constructor using matrixArray and null as Color array.
