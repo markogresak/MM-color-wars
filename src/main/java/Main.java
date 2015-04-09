@@ -37,7 +37,7 @@ public class Main {
             iterations++;
         }
         long end = System.nanoTime() - allStart;
-        System.out.printf("St iteracij: %d\n", iterations);
-        System.out.printf("Celoten cas: %d\n", end);
+        System.out.printf("St iteracij: %,d\n", iterations);
+        System.out.printf("Celoten cas: %.3fs\n", end / 1e9);
     }
 }
