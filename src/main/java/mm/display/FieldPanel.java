@@ -1,22 +1,17 @@
 package mm.display;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import mm.structures.ColorField;
 import mm.structures.ColorPixel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 public class FieldPanel extends JPanel {
 
-        private ColorField field;
-        private ColorPixel[] colors;
+    private ColorField field;
+    private ColorPixel[] colors;
 
-        public FieldPanel(ColorField field) {
+    public FieldPanel(ColorField field) {
         this.field = field;
         this.colors = field.getColors();
     }
@@ -27,8 +22,8 @@ public class FieldPanel extends JPanel {
         Rectangle bounds = g.getClipBounds();
         int n = field.getN();
         int elementSize = bounds.height / n;
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 ColorPixel pixel = colors[field.getElement2D(i, j)];
                 g.setColor(pixel.getColor());
                 g.fillRect(j * elementSize, i * elementSize, elementSize, elementSize);

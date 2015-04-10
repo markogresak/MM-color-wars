@@ -45,6 +45,15 @@ public class ColorField extends Matrix {
         init(colors, true);
     }
 
+    public static ColorField GenerateField(int n, ColorPixel[] colors) {
+        ColorField cf = new ColorField(n, colors);
+        Random r = new Random();
+        for (int i = 0; i < cf.length; i++) {
+            cf.setElement(i, colors[r.nextInt(cf.colorCount)].getCode());
+        }
+        return cf;
+    }
+
     /**
      * Initialize colors array and color map (array of ints representing colors).
      *
@@ -132,15 +141,6 @@ public class ColorField extends Matrix {
             cf.setElement(i, getNeighbours(i)[nextNeighbours[i]]);
         }
 
-        return cf;
-    }
-
-    public static ColorField GenerateField(int n, ColorPixel[] colors) {
-        ColorField cf = new ColorField(n, colors);
-        Random r = new Random();
-        for (int i = 0; i < cf.length; i++) {
-            cf.setElement(i, colors[r.nextInt(cf.colorCount)].getCode());
-        }
         return cf;
     }
 }

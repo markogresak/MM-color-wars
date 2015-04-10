@@ -121,8 +121,8 @@ public class Matrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < m; i++) {
-            for(int j = 0; j < n; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 sb.append(a[indexOf(i, j)] + " ");
             }
             sb.append("\n");

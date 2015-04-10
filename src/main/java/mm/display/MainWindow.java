@@ -24,7 +24,7 @@ public class MainWindow {
     }
 
     public void saveAsJPEG(String filename) {
-       window.saveAsJPEG(filename);
+        window.saveAsJPEG(filename);
     }
 }
 

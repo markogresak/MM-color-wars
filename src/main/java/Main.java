@@ -31,7 +31,7 @@ public class Main {
 
         long allStart = System.nanoTime();
         long iterations = 0;
-        while(!cf.isAllSame()) {
+        while (!cf.isAllSame()) {
             cf = cf.updateNeighbours();
             window.updateField(cf);
             iterations++;
