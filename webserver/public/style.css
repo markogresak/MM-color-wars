@@ -1,0 +1,12 @@
+.canvasjs-chart-credit {
+  display: none !important;
+}
+
+#slike {
+  padding-top: 500px;
+  display: none;
+}
+
+#slike img:first-child {
+  border-top: 5px solid black;
+}
