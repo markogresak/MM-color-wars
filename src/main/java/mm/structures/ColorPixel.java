@@ -3,7 +3,7 @@ package mm.structures;
 public class ColorPixel {
 
     private int code;
-    private double probability;
+    private int count;
     private java.awt.Color color;
 
     public ColorPixel() {
@@ -20,14 +20,6 @@ public class ColorPixel {
 
     protected void setCode(int code) {
         this.code = code;
-    }
-
-    public double getProbability() {
-        return probability;
-    }
-
-    protected void setProbability(double probability) {
-        this.probability = probability;
     }
 
     public java.awt.Color getColor() {
