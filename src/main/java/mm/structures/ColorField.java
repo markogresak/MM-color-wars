@@ -46,7 +46,14 @@ public class ColorField extends Matrix {
         init(colors, true);
     }
 
-    public static ColorField GenerateField(int n, ColorPixel[] colors) {
+    /**
+     *
+     * @param n
+     * @param colors
+     * @param r - Random generator to be used (ex.: use same seed every time)
+     * @return
+     */
+    public static ColorField GenerateField(int n, ColorPixel[] colors, Random r) {
         ColorField cf = new ColorField(n, colors);
         for (int i = 0; i < cf.length; i++) {
             cf.setElement(i, colors[r.nextInt(cf.colorCount)].getCode());
