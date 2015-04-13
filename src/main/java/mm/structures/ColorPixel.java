@@ -35,6 +35,14 @@ public class ColorPixel {
         }
     }
 
+    public static String colorsAsJSONArray(ColorPixel[] colors) {
+        return Arrays.toString(Arrays.stream(colors).map(ColorPixel::colorHex).toArray());
+    }
+
+    public static String colorsCountAsJSONArray(ColorPixel[] colors, int iterations, double fieldSize) {
+        return Arrays.toString(Arrays.stream(colors).map(c -> c.toJSON(iterations, fieldSize)).toArray());
+    }
+
     private static String substrUpTo(String s) {
         while(s.length() < 3) {
             s += "0";
@@ -85,5 +93,13 @@ public class ColorPixel {
 
     public void setColor(java.awt.Color color) {
         this.color = color;
+    }
+
+    public String toJSON(int iterations, double allFieldCount) {
+        return String.format("{\"x\":%d,\"y\":%.3f}", iterations, count / allFieldCount);
+    }
+
+    public String colorHex() {
+        return String.format("\"#%06X\"", color.getRGB() & 0xFFFFFF);
     }
 }
