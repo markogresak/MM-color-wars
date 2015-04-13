@@ -1,9 +1,12 @@
 package mm.structures;
 
+import java.util.Arrays;
+
 public class ColorPixel {
 
     private int code;
     private int count;
+    private double probability;
     private java.awt.Color color;
 
     public ColorPixel() {
@@ -11,7 +14,36 @@ public class ColorPixel {
     }
 
     public ColorPixel(java.awt.Color color) {
+        this(color, 0.0);
+    }
+
+    public ColorPixel(java.awt.Color color, double probability) {
         this.color = color;
+        this.probability = probability;
+    }
+
+    private static String substrUpTo(String s) {
+        while(s.length() < 3) {
+            s += "0";
+        }
+        return s.substring(0, 3);
+    }
+
+    public static int[] getProbabilityArray(ColorPixel[] colors) {
+        int[] decimalPlaces = Arrays.stream(colors)
+                .map(c -> Integer.parseInt(substrUpTo(Double.toString(c.probability).split("\\.")[1])))
+                .mapToInt(Integer::intValue).toArray();
+
+        int[] a = new int[Arrays.stream(decimalPlaces).sum()];
+        int[] codes = Arrays.stream(colors).map(ColorPixel::getCode).mapToInt(Integer::intValue).toArray();
+
+        int index = 0;
+        for (int i = 0; i < decimalPlaces.length; i++) {
+            Arrays.fill(a, index, index + decimalPlaces[i], codes[i]);
+            index += decimalPlaces[i];
+        }
+
+        return a;
     }
 
     public int getCode() {

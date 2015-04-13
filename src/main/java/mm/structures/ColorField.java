@@ -54,9 +54,11 @@ public class ColorField extends Matrix {
      * @return
      */
     public static ColorField GenerateField(int n, ColorPixel[] colors, Random r) {
+        int[] probabilityVector = ColorPixel.getProbabilityArray(colors);
         ColorField cf = new ColorField(n, colors);
         for (int i = 0; i < cf.length; i++) {
-            cf.setElement(i, colors[r.nextInt(cf.colorCount)].getCode());
+            int index = probabilityVector[r.nextInt(probabilityVector.length)];
+            cf.setElement(i, colors[index].getCode());
         }
         return cf;
     }
