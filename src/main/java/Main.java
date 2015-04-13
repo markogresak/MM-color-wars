@@ -1,14 +1,23 @@
 import mm.display.MainWindow;
+import mm.graph.SocketServer;
 import mm.structures.ColorField;
 import mm.structures.ColorPixel;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        final int N = 100;
+        int port = 8887;
+        SocketServer s = new SocketServer(port);
+        s.start();
+
+        final int N = 50;
+        final double FIELD_SIZE = N * N * 1.0;
+        final Random random = new Random("VojnaBarv".hashCode());
 
         ColorPixel[] colors = new ColorPixel[]{
                 new ColorPixel(new Color(124, 7, 142), 0.4),
@@ -24,22 +33,62 @@ public class Main {
         };
         ColorPixel.setCodes(colors);
 
-        long start = System.nanoTime();
-        ColorField cf = ColorField.GenerateField(N, colors);
-        System.out.printf("generiranje polja %d x %d: %.3fs\n", N, N, (System.nanoTime() - start) / 1e9);
-
         ColorField initialCf = ColorField.GenerateField(N, colors, random);
+        ColorField cf = initialCf;
         MainWindow window = new MainWindow(cf);
 
-        long allStart = System.nanoTime();
-        long iterations = 0;
-        while (!cf.isAllSame()) {
-            cf = cf.updateNeighbours();
-            window.updateField(cf);
-            iterations++;
+
+//        boolean first = true;
+//        for(int i = 0; i < 100; i++) {
+//            ColorField initialCf = ColorField.GenerateField(N, colors, random);
+//            ColorField cf = initialCf;
+//            if(first) {
+//                window = new MainWindow(cf);
+//                first = false;
+//            }
+//            else {
+//                window.updateField(cf);
+//            }
+//            System.out.println(ColorPixel.colorsCountAsJSONArray(cf.getColors(), 0, FIELD_SIZE));
+//            Thread.sleep(5000);
+//        }
+
+        long ss = System.nanoTime();
+
+        int[] zmage = new int[100];
+        for (int i = 0; i < 10; i++) {
+
+            String colorsJSON = String.format("{\"message\": \"colors\", \"value\": %s}", ColorPixel.colorsAsJSONArray(cf.getColors()));
+//            System.out.println("send: " + colorsJSON);
+            s.sendToAll(colorsJSON);
+
+            long start = System.nanoTime();
+
+            long allStart = System.nanoTime();
+            int iterations = 0;
+            while (!cf.isAllSame()) {
+                cf = cf.updateNeighbours();
+                window.updateField(cf);
+                if (iterations % 250 == 0) {
+                    s.sendToAll(ColorPixel.colorsCountAsJSONArray(cf.getColors(), iterations, FIELD_SIZE));
+                }
+                iterations++;
+            }
+            zmage[i] = cf.getColorWon().getCode();
+            System.out.println("Zmagala: " + zmage[i]);
+            long end = System.nanoTime() - allStart;
+//            System.out.printf("St iteracij: %,d\n", iterations);
+            System.out.printf("Celoten cas: %.3fs\n", end / 1e9);
+//            Thread.sleep(2000);
+            cf = initialCf;
         }
-        long end = System.nanoTime() - allStart;
-        System.out.printf("St iteracij: %,d\n", iterations);
-        System.out.printf("Celoten cas: %.3fs\n", end / 1e9);
+
+        System.out.printf("end: %.3fs\n", (System.nanoTime() - ss) / 1e9);
+        System.out.println(Arrays.toString(zmage));
+        int[] st = new int[colors.length];
+        for (int z : zmage) {
+            st[z]++;
+        }
+        System.out.println("razmerje: " + Arrays.toString(st));
     }
 }
