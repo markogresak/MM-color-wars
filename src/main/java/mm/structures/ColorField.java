@@ -8,12 +8,13 @@ import java.util.Random;
  */
 public class ColorField extends Matrix {
 
-    private static final Random r = new Random(1000);
+//    private static final Random r = new Random("VojnaBarv".hashCode());
 
     private int n, colorCount;
     private int[][] neighbourMask;
     private int[] neighbourLengths;
     private ColorPixel[] colors;
+    private Random r;
 
     /**
      * Initialize mm.structures.ColorField as n x n matrix using given colors array as colors.
@@ -47,7 +48,6 @@ public class ColorField extends Matrix {
 
     public static ColorField GenerateField(int n, ColorPixel[] colors) {
         ColorField cf = new ColorField(n, colors);
-        Random r = new Random();
         for (int i = 0; i < cf.length; i++) {
             cf.setElement(i, colors[r.nextInt(cf.colorCount)].getCode());
         }
@@ -60,6 +60,7 @@ public class ColorField extends Matrix {
      * @param colors - Colors to be used in field.
      */
     private void init(ColorPixel[] colors, boolean calculateNeighbourMask) {
+        this.r = new Random();
         this.n = super.n;
         this.colors = colors;
         this.colorCount = colors.length;
