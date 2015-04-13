@@ -1,0 +1,15 @@
+{
+  "name": "MM-vojna-barv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Marko Grešak",
+  "private": true,
+  "license": "",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "3.4.8"
+  }
+}
