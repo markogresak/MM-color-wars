@@ -55,9 +55,11 @@ public class ColorField extends Matrix {
      */
     public static ColorField GenerateField(int n, ColorPixel[] colors, Random r) {
         int[] probabilityVector = ColorPixel.getProbabilityArray(colors);
+        ColorPixel.resetAllColors(colors);
         ColorField cf = new ColorField(n, colors);
         for (int i = 0; i < cf.length; i++) {
             int index = probabilityVector[r.nextInt(probabilityVector.length)];
+            cf.colors[index].addCount();
             cf.setElement(i, colors[index].getCode());
         }
         return cf;
@@ -145,10 +147,12 @@ public class ColorField extends Matrix {
 
         int[] nextNeighbours = getNextNeighbours();
 
+        ColorPixel.resetAllColors(colors);
+
         for (int i = 0; i < length; i++) {
-//            final int[] neighbours = getNeighbours(i);
-//            cf.setElement(i, neighbours[r.nextInt(neighbours.length)]);
-            cf.setElement(i, getNeighbours(i)[nextNeighbours[i]]);
+            int newCode = getNeighbours(i)[nextNeighbours[i]];
+            this.colors[newCode].addCount();
+            cf.setElement(i, newCode);
         }
 
         return cf;
