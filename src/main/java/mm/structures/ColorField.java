@@ -111,6 +111,10 @@ public class ColorField extends Matrix {
         return colors;
     }
 
+    public ColorPixel getColorWon() {
+        return colors[a[0]];
+    }
+
     /**
      * Find values of neighbours of (i, j).
      *
