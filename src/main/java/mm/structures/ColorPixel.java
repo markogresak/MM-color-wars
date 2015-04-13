@@ -22,6 +22,12 @@ public class ColorPixel {
         this.probability = probability;
     }
 
+    public static void setCodes(ColorPixel[] colors) {
+        int code = 0;
+        for (ColorPixel c : colors) {
+            c.setCode(code++);
+        }
+    }
     private static String substrUpTo(String s) {
         while(s.length() < 3) {
             s += "0";
