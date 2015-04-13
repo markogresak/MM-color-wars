@@ -28,6 +28,13 @@ public class ColorPixel {
             c.setCode(code++);
         }
     }
+
+    public static void resetAllColors(ColorPixel[] colors) {
+        for (ColorPixel c : colors) {
+            c.setCount(0);
+        }
+    }
+
     private static String substrUpTo(String s) {
         while(s.length() < 3) {
             s += "0";
@@ -56,8 +63,20 @@ public class ColorPixel {
         return code;
     }
 
-    protected void setCode(int code) {
+    private void setCode(int code) {
         this.code = code;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void addCount() {
+        this.count++;
     }
 
     public java.awt.Color getColor() {
