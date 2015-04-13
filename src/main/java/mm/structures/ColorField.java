@@ -76,9 +76,7 @@ public class ColorField extends Matrix {
         this.colors = colors;
         this.colorCount = colors.length;
         // Set codes for each color.
-        for (int i = 0; i < colorCount; i++) {
-            colors[i].setCode(i);
-        }
+        ColorPixel.setCodes(colors);
         if (calculateNeighbourMask) {
             // Calculate neighbourMask array in advance, used to improve performance
             //  compared to calculating indices for every `getNeighbours` lookup.
