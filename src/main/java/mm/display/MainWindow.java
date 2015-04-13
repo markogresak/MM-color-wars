@@ -22,10 +22,6 @@ public class MainWindow {
         window.setField(field);
         window.repaint();
     }
-
-    public void saveAsJPEG(String filename) {
-        window.saveAsJPEG(filename);
-    }
 }
 
 class MainFrame extends JFrame implements ComponentListener {
@@ -41,10 +37,6 @@ class MainFrame extends JFrame implements ComponentListener {
 
     public void setField(ColorField field) {
         fieldPanel.setField(field);
-    }
-
-    public void saveAsJPEG(String filename) {
-        fieldPanel.saveAsJPEG(filename);
     }
 
     @Override
