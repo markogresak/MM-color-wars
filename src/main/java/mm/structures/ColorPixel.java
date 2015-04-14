@@ -10,11 +10,11 @@ public class ColorPixel {
     private java.awt.Color color;
 
     public ColorPixel() {
-        this.color = new java.awt.Color(0, 0, 0);
+        this(new java.awt.Color(0, 0, 0));
     }
 
     public ColorPixel(java.awt.Color color) {
-        this(color, 0.0);
+        this(color, 0.5);
     }
 
     public ColorPixel(java.awt.Color color, double probability) {
@@ -77,6 +77,10 @@ public class ColorPixel {
 
     public int getCount() {
         return count;
+    }
+
+    public double getProbability() {
+        return probability;
     }
 
     public void setCount(int count) {
