@@ -6,12 +6,20 @@ function loadData(callback, samples, n, t) {
 }
 
 function makeHistogram(data) {
+  window.data = data;
   CanvasJS.addColorSet('graphColors', ['#1FA2CE']);
-  histogram = new CanvasJS.Chart('chartContainer', {
+  histogram = new CanvasJS.Chart('histogramContainer', {
     title: {
       text: 'Delez cez cas'
     },
     colorSet: 'graphColors',
+    height: 500,
+    axisX: {
+      minimum: 0
+    },
+    axisY: {
+      minimum: 0
+    },
     data: [{
       type: 'column',
       dataPoints: data
@@ -21,5 +29,5 @@ function makeHistogram(data) {
 }
 
 $(function() {
-  loadData(makeHistogram);
+  loadData(makeHistogram, 500, 50);
 });
