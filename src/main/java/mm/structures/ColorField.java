@@ -115,6 +115,17 @@ public class ColorField extends Matrix {
         return colors[a[0]];
     }
 
+    public double getColorPercentage(ColorPixel color) {
+        int code = color.getCode();
+        int count = 0;
+        for (int c : a) {
+            if(c == code) {
+                count++;
+            }
+        }
+        return count / ((double) a.length);
+    }
+
     /**
      * Find values of neighbours of (i, j).
      *
