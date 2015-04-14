@@ -20,15 +20,15 @@ public class Main {
         final Random random = new Random("VojnaBarv".hashCode());
 
         ColorPixel[] colors = new ColorPixel[]{
-                new ColorPixel(new Color(124, 7, 142), 0.4),
-//                new ColorPixel(new Color(236, 74, 72)),
-//                new ColorPixel(new Color(255, 252, 88)),
-                new ColorPixel(new Color(31, 162, 209), 0.3),
+                new ColorPixel(new Color(124, 7, 142), 0.3),
+                new ColorPixel(new Color(236, 74, 72), 0.05),
+                new ColorPixel(new Color(255, 252, 88), 0.05),
+                new ColorPixel(new Color(31, 162, 209), 0.1),
                 new ColorPixel(new Color(128, 207, 12), 0.1),
-//                new ColorPixel(new Color(71, 34, 69)),
-//                new ColorPixel(new Color(1, 153, 138)),
-                new ColorPixel(new Color(206, 23, 54), 0.1),
-//                new ColorPixel(new Color(247, 88, 48)),
+                new ColorPixel(new Color(71, 34, 69), 0.05),
+                new ColorPixel(new Color(1, 153, 138), 0.125),
+                new ColorPixel(new Color(206, 23, 54), 0.075),
+                new ColorPixel(new Color(247, 88, 48), 0.05),
                 new ColorPixel(new Color(12, 8, 65), 0.1)
         };
         ColorPixel.setCodes(colors);
