@@ -28,6 +28,17 @@ function makeHistogram(data) {
   histogram.render();
 }
 
+function updateView() {
+  var samples = samplesEl.val();
+  var n = sizenEl.val();
+  var t = tEl.val();
+  loadData(makeHistogram, samples, n, t);
+}
+
 $(function() {
-  loadData(makeHistogram, 500, 50);
+  samplesEl = $('#samples');
+  sizenEl = $('#sizen');
+  tEl = $('#t');
+  updateView();
+  $('select').change(updateView);
 });

@@ -15,10 +15,13 @@
   border-top: 5px solid black;
 }
 
-#probability {
+#probability, #histogram-controls {
   padding-top: 540px;
-  font-size: 40px;
   text-align: center;
+}
+
+#probability {
+  font-size: 40px;
 }
 
 #values .value {
@@ -26,4 +29,8 @@
   border-radius: 30px;
   padding: 8px;
   margin-left: 10px;
+}
+
+#histogram-controls > span {
+  margin: 0 10px;
 }
