@@ -15,7 +15,7 @@ public class SendInfinite implements Runnable {
         try {
             while (true) {
                 ws.sendToAll(message);
-                Thread.sleep(100);
+                Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
