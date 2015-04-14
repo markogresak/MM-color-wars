@@ -32,7 +32,7 @@ function connectWS(messageCB) {
 function messageRecieved(e) {
   var data = JSON.parse(e.data);
   if (data.message && data.message === 'init' && !initDone) {
-    saveChartToImg();
+    // saveChartToImg();
     saveWon();
     colors = data.colors;
     probabilities = data.p;
@@ -40,8 +40,6 @@ function messageRecieved(e) {
     initChart(colors);
     ws.send('init-ok');
     initDone = true;
-  } else if (data.message && data.message === 'chart') {
-    // drawWonChart(data.value);
   } else if (chart && !data.message) {
     updateChart(data);
   }
@@ -106,35 +104,8 @@ function saveWon() {
   } catch (e) {}
 }
 
-function drawWonChart(newData) {
-  // if (wonIndices.length === HISTOGRAM_T) {
-  //   var numWon = wonIndices.splice(0)
-  //     .filter(function(e) {
-  //       // if color at index 0 won
-  //       return e === 0;
-  //     })
-  //     .length / HISTOGRAM_T;
-  // wonChartData.push({
-  //   x: wonChartData.length + 1,
-  //   y: Math.log(numWon / (1 - numWon))
-  // });
-  // wonChartData.push(newData);
-  //
-  // if(!histogram) {
-  //   histogram = new CanvasJS.Chart('wonChartContainer', {
-  //     title: {
-  //       text: 'Razmerje zmag'
-  //     },
-  //     data: [{
-  //       type: 'column',
-  //       dataPoints: wonChartData
-  //     }]
-  //   });
-  // }
-  // histogram.render();
-}
-
 function saveChartToImg() {
+  console.log('try save');
   try {
     if (datapoints) {
       var canvas = document.querySelector('#chartContainer canvas');
@@ -143,6 +114,7 @@ function saveChartToImg() {
       var newImage = new Image();
       newImage.src = img;
       imageContainer.appendChild(newImage);
+      console.log('saved');
     }
   } catch (e) {}
 }
@@ -151,6 +123,7 @@ function updateChart(data) {
   var color = data[0],
     lastColor = datapoints[0][datapoints[0].length - 1];
   if (color && lastColor && color.x <= lastColor.x) {
+    saveChartToImg();
     initDatapoints();
   }
   data.map(function(e, i) {
