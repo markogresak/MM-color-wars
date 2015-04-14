@@ -12,8 +12,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         int port = 8887;
-        SocketServer s = new SocketServer(port);
-        s.start();
+        SocketServer ws = new SocketServer(port);
+        ws.start();
 
         final int N = 50;
         final double FIELD_SIZE = N * N * 1.0;
@@ -53,8 +53,8 @@ public class Main {
             while (!cf.isAllSame()) {
                 cf = cf.updateNeighbours();
                 window.updateField(cf);
-                if (iterations % 250 == 0) {
-                    s.sendToAll(ColorPixel.colorsCountAsJSONArray(cf.getColors(), iterations, FIELD_SIZE));
+                if (iterations % 50 == 0) {
+                    ws.sendToAll(ColorPixel.colorsCountAsJSONArray(cf.getColors(), iterations, FIELD_SIZE));
                 }
                 iterations++;
             }
