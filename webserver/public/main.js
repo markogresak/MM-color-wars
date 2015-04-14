@@ -1,4 +1,5 @@
 var WEBSOCKET_ADDRESS = 'ws://localhost:8887';
+var HISTOGRAM_T = 10;
 
 /**
  * Attempt to establish new websockets connection
@@ -90,6 +91,49 @@ function initChart(colors) {
   return chart;
 }
 
+function saveWon() {
+  try {
+    if (datapoints) {
+      var i;
+      for (i = 0; i < datapoints.length; i++) {
+        var y = datapoints[i][datapoints[i].length - 1];
+        if (y === 1) {
+          break;
+        }
+      }
+      wonIndices.push(i);
+    }
+  } catch (e) {}
+}
+
+function drawWonChart(newData) {
+  // if (wonIndices.length === HISTOGRAM_T) {
+  //   var numWon = wonIndices.splice(0)
+  //     .filter(function(e) {
+  //       // if color at index 0 won
+  //       return e === 0;
+  //     })
+  //     .length / HISTOGRAM_T;
+  // wonChartData.push({
+  //   x: wonChartData.length + 1,
+  //   y: Math.log(numWon / (1 - numWon))
+  // });
+  // wonChartData.push(newData);
+  //
+  // if(!histogram) {
+  //   histogram = new CanvasJS.Chart('wonChartContainer', {
+  //     title: {
+  //       text: 'Razmerje zmag'
+  //     },
+  //     data: [{
+  //       type: 'column',
+  //       dataPoints: wonChartData
+  //     }]
+  //   });
+  // }
+  // histogram.render();
+}
+
 function saveChartToImg() {
   try {
     if (datapoints) {
@@ -130,6 +174,9 @@ function displayProbabilites(data, colors) {
 
 $(function() {
   chart = null;
+  histogram = null;
+  wonIndices = [];
+  wonChartData = [];
   valuesEl = $('#values');
   initDone = false;
   connectWS(messageRecieved);
