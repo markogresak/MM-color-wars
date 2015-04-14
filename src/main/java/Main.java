@@ -1,4 +1,5 @@
 import mm.display.MainWindow;
+import mm.graph.SendInfinite;
 import mm.graph.SocketServer;
 import mm.structures.ColorField;
 import mm.structures.ColorPixel;
