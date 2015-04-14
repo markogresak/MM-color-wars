@@ -6,20 +6,21 @@ var WEBSOCKET_ADDRESS = 'ws://localhost:8887';
  */
 function connectWS(messageCB) {
   // Init websockets with globally defined address.
-  var ws = new WebSocket(WEBSOCKET_ADDRESS);
+  ws = new WebSocket(WEBSOCKET_ADDRESS);
   ws.onopen = function() {
     // Print a message when connection opens.
     console.log('open on ' + WEBSOCKET_ADDRESS);
-  }
+  };
   ws.onclose = function() {
-      // Print a message when connection closes.
-      console.log('Websocket closed. Trying to reconnect.');
-      // Call this function again (try to reconnect).
-      setTimeout(function() {
-        connectWS(messageCB);
-      }, 1000);
-    }
-    // Set passed function as onmessage callback.
+    initDone = false;
+    // Print a message when connection closes.
+    console.log('Websocket closed. Trying to reconnect.');
+    // Call this function again (try to reconnect).
+    setTimeout(function() {
+      connectWS(messageCB);
+    }, 1000);
+  };
+  // Set passed function as onmessage callback.
   ws.onmessage = messageCB;
 }
 
@@ -29,13 +30,18 @@ function connectWS(messageCB) {
  */
 function messageRecieved(e) {
   var data = JSON.parse(e.data);
-  if (data.message) {
-    if (data.message === 'colors') {
-      saveChartToImg();
-      colors = data.value;
-      initChart(colors);
-    }
-  } else if (chart) {
+  if (data.message && data.message === 'init' && !initDone) {
+    saveChartToImg();
+    saveWon();
+    colors = data.colors;
+    probabilities = data.p;
+    displayProbabilites(probabilities, colors);
+    initChart(colors);
+    ws.send('init-ok');
+    initDone = true;
+  } else if (data.message && data.message === 'chart') {
+    // drawWonChart(data.value);
+  } else if (chart && !data.message) {
     updateChart(data);
   }
 }
@@ -112,5 +118,6 @@ function updateChart(data) {
 
 $(function() {
   chart = null;
+  initDone = false;
   connectWS(messageRecieved);
 });
