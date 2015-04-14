@@ -13,9 +13,9 @@ import java.util.Random;
 public class HistogramMain {
 
     public static void main(String[] args) throws IOException {
-        final int[] Ns = new int[]{25, 50};
-        final int[] Ts = new int[]{10};
-        final int[] samples = new int[]{10, 100, 250, 500, 1000};
+        final int[] Ns = new int[]{5, 10, 25, 50};
+        final int[] Ts = new int[]{1, 5, 10, 25, 50};
+        final int[] samples = new int[]{10, 50, 100, 250, 500, 1000};
         for (int s : samples) {
             for (int n : Ns) {
                 for (int t : Ts) {
@@ -96,7 +96,7 @@ class SamplingTask implements Runnable {
             samplesExist = count > 0;
             if (samplesExist) {
                 double xt = sum / ((double) count);
-                avgSamples.add(Math.log( 1 + (xt / (1 - xt)) ));
+                avgSamples.add(Math.log(1 + (xt / (1 - xt))));
             }
             sampleI++;
         }
