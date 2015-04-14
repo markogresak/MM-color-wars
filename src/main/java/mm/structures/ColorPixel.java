@@ -50,6 +50,10 @@ public class ColorPixel {
         return s.substring(0, 3);
     }
 
+    public static double[] getColorPercentages(ColorPixel[] colors, double fieldSize) {
+        return Arrays.stream(colors).map(c -> c.count / fieldSize).mapToDouble(Double::doubleValue).toArray();
+    }
+
     public static int[] getProbabilityArray(ColorPixel[] colors) {
         int[] decimalPlaces = Arrays.stream(colors)
                 .map(c -> Integer.parseInt(substrUpTo(Double.toString(c.probability).split("\\.")[1])))
