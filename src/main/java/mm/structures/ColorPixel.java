@@ -67,6 +67,10 @@ public class ColorPixel {
         return a;
     }
 
+    public static String getProbabilitesJSON(ColorPixel[] colors) {
+        return Arrays.toString(Arrays.stream(colors).map(ColorPixel::getProbability).toArray());
+    }
+
     public int getCode() {
         return code;
     }
