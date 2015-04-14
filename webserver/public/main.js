@@ -61,27 +61,27 @@ function initChart(colors) {
   for (var i = 0; i < 10; i++) {
     datapoints.push([]);
     chartData.push({
-      type: "line",
+      type: 'line',
       dataPoints: datapoints[i],
-      markerType: "none"
+      markerType: 'none'
     });
   }
   initDatapoints();
 
-  CanvasJS.addColorSet("graphColors", colors);
+  CanvasJS.addColorSet('graphColors', colors);
 
-  chart = new CanvasJS.Chart("chartContainer", {
+  chart = new CanvasJS.Chart('chartContainer', {
     title: {
-      text: "Delež barv"
+      text: 'Delež barv'
     },
-    colorSet: "graphColors",
+    colorSet: 'graphColors',
     height: 500,
     axisX: {
-      title: "čas [iteracije]",
+      title: 'čas [iteracije]',
       minimum: 0
     },
     axisY: {
-      title: "verjetnost",
+      title: 'verjetnost',
       minimum: 0,
       maximum: 1.0
     },
@@ -137,9 +137,9 @@ function drawWonChart(newData) {
 function saveChartToImg() {
   try {
     if (datapoints) {
-      var canvas = document.querySelector("#chartContainer canvas");
-      var img = canvas.toDataURL("image/png");
-      var imageContainer = document.getElementById("slike");
+      var canvas = document.querySelector('#chartContainer canvas');
+      var img = canvas.toDataURL('image/png');
+      var imageContainer = document.getElementById('slike');
       var newImage = new Image();
       newImage.src = img;
       imageContainer.appendChild(newImage);
