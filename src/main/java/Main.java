@@ -5,7 +5,6 @@ import mm.structures.ColorField;
 import mm.structures.ColorPixel;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
@@ -46,30 +45,24 @@ public class Main {
 
         long ss = System.nanoTime();
 
+        for (int i = 0; i < 10000; i++) {
             long allStart = System.nanoTime();
             int iterations = 0;
             while (!cf.isAllSame()) {
                 cf = cf.updateNeighbours();
                 window.updateField(cf);
-                if (iterations % 50 == 0) {
+                if (iterations % 5 == 0) {
                     ws.sendToAll(ColorPixel.colorsCountAsJSONArray(cf.getColors(), iterations, FIELD_SIZE));
                 }
                 iterations++;
+                Thread.sleep(20);
             }
-            zmage[i] = cf.getColorWon().getCode();
-            System.out.println("Zmagala: " + zmage[i]);
-            long end = System.nanoTime() - allStart;
-            System.out.printf("Celoten cas: %.3fs\n", end / 1e9);
-//            Thread.sleep(2000);
+            System.out.printf("St iteracij: %,d\n", iterations);
+            System.out.printf("Celoten cas: %.3fs\n", (System.nanoTime() - allStart) / 1e9);
+            Thread.sleep(2000);
             cf = initialCf;
         }
 
         System.out.printf("end: %.3fs\n", (System.nanoTime() - ss) / 1e9);
-        System.out.println(Arrays.toString(zmage));
-        int[] st = new int[colors.length];
-        for (int z : zmage) {
-            st[z]++;
-        }
-        System.out.println("razmerje: " + Arrays.toString(st));
     }
 }
