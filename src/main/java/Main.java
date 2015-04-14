@@ -38,28 +38,12 @@ public class Main {
         MainWindow window = new MainWindow(cf);
 
 
-//        boolean first = true;
-//        for(int i = 0; i < 100; i++) {
-//            ColorField initialCf = ColorField.GenerateField(N, colors, random);
-//            ColorField cf = initialCf;
-//            if(first) {
-//                window = new MainWindow(cf);
-//                first = false;
-//            }
-//            else {
-//                window.updateField(cf);
-//            }
-//            System.out.println(ColorPixel.colorsCountAsJSONArray(cf.getColors(), 0, FIELD_SIZE));
-//            Thread.sleep(5000);
-//        }
-
         long ss = System.nanoTime();
 
         int[] zmage = new int[100];
         for (int i = 0; i < 10; i++) {
 
             String colorsJSON = String.format("{\"message\": \"colors\", \"value\": %s}", ColorPixel.colorsAsJSONArray(cf.getColors()));
-//            System.out.println("send: " + colorsJSON);
             s.sendToAll(colorsJSON);
 
             long start = System.nanoTime();
@@ -77,7 +61,6 @@ public class Main {
             zmage[i] = cf.getColorWon().getCode();
             System.out.println("Zmagala: " + zmage[i]);
             long end = System.nanoTime() - allStart;
-//            System.out.printf("St iteracij: %,d\n", iterations);
             System.out.printf("Celoten cas: %.3fs\n", end / 1e9);
 //            Thread.sleep(2000);
             cf = initialCf;
