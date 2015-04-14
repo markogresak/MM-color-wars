@@ -1,3 +1,7 @@
+* {
+  font-family: sans-serif;
+}
+
 .canvasjs-chart-credit {
   display: none !important;
 }
@@ -9,4 +13,21 @@
 
 #slike img:first-child {
   border-top: 5px solid black;
+}
+
+#probability {
+  padding-top: 540px;
+  font-size: 40px;
+  text-align: center;
+}
+
+#values .value {
+  border: 8px solid #80CF0C;
+  border-radius: 30px;
+  padding: 8px;
+  margin-left: 10px;
+}
+
+#wonChartContainer {
+  padding-top: 580px;
 }
