@@ -148,10 +148,9 @@ function saveChartToImg() {
 }
 
 function updateChart(data) {
-  var d = data[0],
-    lastD = datapoints[0][datapoints[0].length - 1];
-  if (d && lastD && d.x < lastD.x) {
-
+  var color = data[0],
+    lastColor = datapoints[0][datapoints[0].length - 1];
+  if (color && lastColor && color.x <= lastColor.x) {
     initDatapoints();
   }
   data.map(function(e, i) {
