@@ -46,14 +46,6 @@ public class Main {
 
         long ss = System.nanoTime();
 
-        int[] zmage = new int[100];
-        for (int i = 0; i < 10; i++) {
-
-            String colorsJSON = String.format("{\"message\": \"colors\", \"value\": %s}", ColorPixel.colorsAsJSONArray(cf.getColors()));
-            s.sendToAll(colorsJSON);
-
-            long start = System.nanoTime();
-
             long allStart = System.nanoTime();
             int iterations = 0;
             while (!cf.isAllSame()) {
