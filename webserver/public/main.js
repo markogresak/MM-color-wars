@@ -116,8 +116,21 @@ function updateChart(data) {
   chart.render();
 }
 
+function displayProbabilites(data, colors) {
+  valuesEl.empty();
+  for (var i = 0; i < data.length; i++) {
+    var p = data[i];
+    var c = colors[i];
+    valuesEl.append($('<span>')
+      .addClass('value')
+      .text(p)
+      .css('border', '8px solid ' + c));
+  }
+}
+
 $(function() {
   chart = null;
+  valuesEl = $('#values');
   initDone = false;
   connectWS(messageRecieved);
 });
