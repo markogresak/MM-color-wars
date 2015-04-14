@@ -37,6 +37,11 @@ public class Main {
         ColorField cf = initialCf;
         MainWindow window = new MainWindow(cf);
 
+        String colorsJSON = String.format("{\"message\": \"init\", \"colors\": %s, \"p\": %s}",
+                ColorPixel.colorsAsJSONArray(cf.getColors()),
+                ColorPixel.getProbabilitesJSON(cf.getColors()));
+        System.out.println("send: " + colorsJSON);
+        new Thread(new SendInfinite(ws, colorsJSON)).start();
 
         long ss = System.nanoTime();
 
