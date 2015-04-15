@@ -17,9 +17,8 @@ public class GraphSampleMain {
         final int RANDOM_SEED = "VojnaBarv".hashCode();
 
         final ColorPixel[] colors = new ColorPixel[]{
-                new ColorPixel(new Color(124, 7, 142), 0.2),
-                new ColorPixel(new Color(31, 162, 209), 0.8)
-//                new ColorPixel(new Color(255, 252, 88), 0.05),
+                new ColorPixel(new Color(124, 7, 142), 0.3),
+                new ColorPixel(new Color(31, 162, 209), 0.7),
 //                new ColorPixel(new Color(128, 207, 12), 0.1),
 //                new ColorPixel(new Color(71, 34, 69), 0.05),
 //                new ColorPixel(new Color(1, 153, 138), 0.125),
@@ -29,17 +28,21 @@ public class GraphSampleMain {
         };
         ColorPixel.setCodes(colors);
 
-        final int[] Ns = new int[]{10, 25};
+        final int[] Ns = new int[]{25};
         final int[] samples = new int[]{10, 25, 50, 100, 250, 500, 1000};
+        final int[] ITERATIONS = new int[]{1, 5, 10, 25, 50, 100};
 
         for (int n : Ns) {
-            new Thread(new GraphSampleTask(samples, 0, n, RANDOM_SEED, colors)).start();
+            for (int i : ITERATIONS) {
+                (new GraphSampleTask(samples, 0, n, i, RANDOM_SEED, colors)).run();
+            }
         }
     }
 }
 
-class GraphSampleTask implements Runnable {
+class GraphSampleTask {
 
+    int ITERATIONS_SAMPLE;
     int[] SAMPLES;
     int COLOR_INDEX;
     int N;
@@ -47,33 +50,39 @@ class GraphSampleTask implements Runnable {
     int maxSample;
     ColorField initialCf;
 
-    public GraphSampleTask(int[] SAMPLES, int COLOR_INDEX, int N, int randomSeed, ColorPixel[] colors) {
+    public GraphSampleTask(int[] SAMPLES, int COLOR_INDEX, int N, int ITERATIONS_SAMPLE, int randomSeed, ColorPixel[] colors) {
         this.SAMPLES = SAMPLES;
         Arrays.sort(this.SAMPLES);
         this.maxSample = SAMPLES[SAMPLES.length - 1];
         this.COLOR_INDEX = COLOR_INDEX;
         this.N = N;
+        this.ITERATIONS_SAMPLE = ITERATIONS_SAMPLE;
         this.FIELD_SIZE = N * N * 1.0;
         final Random random = new Random(randomSeed);
         initialCf = ColorField.GenerateField(N, colors, random);
     }
 
-    @Override
     public void run() {
         ColorField cf = initialCf;
         ArrayList<ArrayList<String>> samplesAl = new ArrayList<>();
 
         int sampleI = 0;
         for (int i = 0; i < maxSample; i++) {
+
             ArrayList<String> arr = new ArrayList<>();
 
             long start = System.nanoTime();
             int iterations = 0;
             while (!cf.isAllSame()) {
                 cf = cf.updateNeighbours();
-                arr.add(cf.getColors()[COLOR_INDEX].toJSON(iterations, FIELD_SIZE));
+                if (iterations % ITERATIONS_SAMPLE == 0) {
+                    arr.add(cf.getColors()[COLOR_INDEX].toJSONAccuraccy(iterations, FIELD_SIZE));
+//                    arr.add(ColorPixel.colorsCountAsJSONs(cf.getColors(), iterations, FIELD_SIZE)[COLOR_INDEX]);
+                }
                 iterations++;
             }
+            arr.add(cf.getColors()[COLOR_INDEX].toJSONAccuraccy(iterations, FIELD_SIZE));
+//            arr.add(ColorPixel.colorsCountAsJSONs(cf.getColors(), iterations, FIELD_SIZE)[COLOR_INDEX]);
             System.out.printf("Sample %4d | time: %.3f | i: %d\n", i, (System.nanoTime() - start) / 1e9, iterations);
 
             samplesAl.add(arr);

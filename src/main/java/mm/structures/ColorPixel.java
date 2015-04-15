@@ -4,10 +4,13 @@ import java.util.Arrays;
 
 public class ColorPixel {
 
+    private static final String MARKER = ", \"markerColor\": \"#7C078E\", \"markerType\": \"circle\", \"markerSize\": 10";
+
     private int code;
     private int count;
     private double probability;
     private java.awt.Color color;
+
 
     public ColorPixel() {
         this(new java.awt.Color(0, 0, 0));
@@ -39,12 +42,16 @@ public class ColorPixel {
         return Arrays.toString(Arrays.stream(colors).map(ColorPixel::colorHex).toArray());
     }
 
+    public static String[] colorsCountAsJSONs(ColorPixel[] colors, int iterations, double fieldSize) {
+        return Arrays.stream(colors).map(c -> c.toJSON(iterations, fieldSize)).toArray(String[]::new);
+    }
+
     public static String colorsCountAsJSONArray(ColorPixel[] colors, int iterations, double fieldSize) {
-        return Arrays.toString(Arrays.stream(colors).map(c -> c.toJSON(iterations, fieldSize)).toArray());
+        return Arrays.toString(colorsCountAsJSONs(colors, iterations, fieldSize));
     }
 
     private static String substrUpTo(String s) {
-        while(s.length() < 3) {
+        while (s.length() < 3) {
             s += "0";
         }
         return s.substring(0, 3);
@@ -87,12 +94,12 @@ public class ColorPixel {
         return count;
     }
 
-    public double getProbability() {
-        return probability;
-    }
-
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public double getProbability() {
+        return probability;
     }
 
     public void addCount() {
@@ -109,6 +116,11 @@ public class ColorPixel {
 
     public String toJSON(int iterations, double allFieldCount) {
         return String.format("{\"x\":%d,\"y\":%.3f}", iterations, count / allFieldCount);
+    }
+
+    public String toJSONAccuraccy(int iterations, double allFieldCount) {
+        double y = count / allFieldCount;
+        return String.format("{\"x\":%d,\"y\":%f%s}", iterations, y, y > 0 && y < 1 ? "" : MARKER);
     }
 
     public String colorHex() {
