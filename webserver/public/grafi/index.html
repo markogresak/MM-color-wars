@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MM Vojna Barv - Grafi</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <div id="grafiContainer"></div>
+
+  <div id="histogram-controls">
+    <span>
+      <span>St. simulacij: </span>
+      <select name="samples" id="samples">
+        <option value="10" selected="selected">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="250">250</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+      </select>
+    </span>
+
+    <span>
+      <span>Velikost: </span>
+      <select name="sizen" id="sizen">
+        <option value="25" selected="selected">25</option>
+        <option value="50">50</option>
+      </select>
+    </span>
+
+  </div>
+
+  <script src="/jquery-2.1.3.min.js"></script>
+  <script src="/canvasjs.min.js"></script>
+  <script src="/grafi.js"></script>
+</body>
+
+</html>
