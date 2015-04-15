@@ -1,7 +1,8 @@
-function loadData(callback, samples, n, t) {
+function loadData(callback, samples, n, i) {
   samples = samples || 10;
   n = n || 25;
-  $.getJSON(`/data/graph-${samples}-${n}x${n}.json`, callback);
+  i = i || 10;
+  $.getJSON(`/data/graph-${samples}-${n}x${n}-i${i}.json`, callback);
 }
 
 function makeGraphs(data) {
@@ -41,14 +42,14 @@ function makeGraphs(data) {
 function updateView() {
   var samples = samplesEl.val();
   var n = sizenEl.val();
-  var t = tEl.val();
-  loadData(makeGraphs, samples, n, t);
+  var i = iEl.val();
+  loadData(makeGraphs, samples, n, i);
 }
 
 $(function() {
   samplesEl = $('#samples');
   sizenEl = $('#sizen');
-  tEl = $('#intervals');
+  iEl = $('#sizei');
   updateView();
   $('select').change(updateView);
 });

@@ -28,12 +28,12 @@ public class GraphSampleMain {
         };
         ColorPixel.setCodes(colors);
 
-        final int[] Ns = new int[]{25};
-        final int[] samples = new int[]{10, 25, 50, 100, 250, 500, 1000};
-        final int[] ITERATIONS = new int[]{1, 5, 10, 25, 50, 100};
+        final int[] Ns = new int[]{5, 10, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100};
+        final int[] samples = new int[]{10, 25, 50, 100};
+        final int[] ITERATION_SAMPLE = new int[]{1, 5, 10, 25, 50, 100};
 
         for (int n : Ns) {
-            for (int i : ITERATIONS) {
+            for (int i : ITERATION_SAMPLE) {
                 (new GraphSampleTask(samples, 0, n, i, RANDOM_SEED, colors)).run();
             }
         }
@@ -77,13 +77,11 @@ class GraphSampleTask {
                 cf = cf.updateNeighbours();
                 if (iterations % ITERATIONS_SAMPLE == 0) {
                     arr.add(cf.getColors()[COLOR_INDEX].toJSONAccuraccy(iterations, FIELD_SIZE));
-//                    arr.add(ColorPixel.colorsCountAsJSONs(cf.getColors(), iterations, FIELD_SIZE)[COLOR_INDEX]);
                 }
                 iterations++;
             }
             arr.add(cf.getColors()[COLOR_INDEX].toJSONAccuraccy(iterations, FIELD_SIZE));
-//            arr.add(ColorPixel.colorsCountAsJSONs(cf.getColors(), iterations, FIELD_SIZE)[COLOR_INDEX]);
-            System.out.printf("Sample %4d | time: %.3f | i: %d\n", i, (System.nanoTime() - start) / 1e9, iterations);
+            System.out.printf("Size: %d x %d | Sample: %4d | i%d | time: %.3f | i: %d\n", N, N, i, ITERATIONS_SAMPLE, (System.nanoTime() - start) / 1e9, iterations);
 
             samplesAl.add(arr);
             if ((i + 1) == SAMPLES[sampleI]) {
@@ -102,7 +100,7 @@ class GraphSampleTask {
         }
         String json = String.format("[%s]", all.substring(1));
 
-        File file = new File(String.format("./webserver/public/data/graph-%d-%dx%d.json", SAMPLES[sampleI], N, N));
+        File file = new File(String.format("./webserver/public/data/graph-%d-%dx%d-i%d.json", SAMPLES[sampleI], N, N, ITERATIONS_SAMPLE));
         file.getParentFile().mkdirs();
 
         try {
