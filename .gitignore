@@ -35,3 +35,6 @@ ehthumbs.db
 *~
 .directory
 img/
+
+# Project
+/webserver/public/data
