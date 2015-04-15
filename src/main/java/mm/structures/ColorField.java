@@ -154,7 +154,7 @@ public class ColorField extends Matrix {
         return nextNeighbours;
     }
 
-    public ColorField updateNeighbours() {
+    synchronized public ColorField updateNeighbours() {
         final Random r = new Random();
         final ColorField cf = new ColorField(n, colors, neighbourMask, neighbourLengths);
 

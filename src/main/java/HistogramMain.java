@@ -17,18 +17,18 @@ public class HistogramMain {
 //        final int[] Ns = new int[]{5, 10, 25};
 //        final int[] Ts = new int[]{1, 5, 10, 25, 50};
 //        final int[] samples = new int[]{10, 50, 100, 250, 500};
-        final int[] Ns = new int[]{25};
+        final int[] Ns = new int[]{10, 25};
         final int[] Ts = new int[]{1, 5, 10, 25, 50, 100, 250, 500, 1000, 2000, 3000, 4000, 5000};
         final int[] samples = new int[]{1000};
         for (int s : samples) {
             for (int n : Ns) {
-                new Thread(new SamplingTask(n, s, Ts)).start();
+                new SamplingTask(n, s, Ts).run();
             }
         }
     }
 }
 
-class SamplingTask implements Runnable {
+class SamplingTask {
 
     int N;
     int SAMPLES;
@@ -40,7 +40,6 @@ class SamplingTask implements Runnable {
         this.HISTOGRAM_T = HISTOGRAM_T;
     }
 
-    @Override
     public void run() {
 
         final Random random = new Random("VojnaBarv".hashCode());
