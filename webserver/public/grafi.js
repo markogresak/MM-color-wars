@@ -46,6 +46,17 @@ function updateView() {
   loadData(makeGraphs, samples, n, i);
 }
 
+function saveChartToImg() {
+  try {
+    var canvas = document.querySelector('#grafiContainer canvas');
+    var img = canvas.toDataURL('image/png');
+    var imageContainer = document.getElementById('slike');
+    var newImage = new Image();
+    newImage.src = img;
+    imageContainer.appendChild(newImage);
+  } catch (e) {}
+}
+
 $(function() {
   samplesEl = $('#samples');
   sizenEl = $('#sizen');
