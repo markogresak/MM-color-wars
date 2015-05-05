@@ -3,11 +3,11 @@ package mm.display;
 import mm.structures.ColorField;
 import mm.structures.ColorPixel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
 
 public class FieldPanel extends JPanel {
 
@@ -37,21 +37,18 @@ public class FieldPanel extends JPanel {
     public void setField(ColorField field) {
         this.field = field;
     }
-    
+
     private void makePanelImage(Component panel) {
         Dimension size = panel.getSize();
         BufferedImage image = new BufferedImage(
-                    size.width, size.height 
-                              , BufferedImage.TYPE_INT_RGB);
+                size.width, size.height
+                , BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         panel.paint(g2);
-        try
-        {
+        try {
             ImageIO.write(image, "png", new File("snapshot.png"));
             System.out.println("Panel saved as Image.");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

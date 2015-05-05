@@ -31,7 +31,7 @@ public class SocketServer extends WebSocketServer {
     @Override
     public void onMessage(WebSocket conn, String message) {
         System.out.println("received message from " + conn.getRemoteSocketAddress() + ": " + message);
-        if(message.equals("init-ok")) {
+        if (message.equals("init-ok")) {
             System.out.println("message ok");
             conn.notify();
         }

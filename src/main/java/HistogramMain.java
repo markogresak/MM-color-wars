@@ -46,7 +46,7 @@ class SamplingTask {
 
         ColorPixel[] colors = new ColorPixel[]{
                 new ColorPixel(new Color(124, 7, 142), 0.25),
-                new ColorPixel(new Color(236, 74, 72), 0.75 ),
+                new ColorPixel(new Color(236, 74, 72), 0.75),
 //                new ColorPixel(new Color(255, 252, 88), 0.05),
 //                new ColorPixel(new Color(31, 162, 209), 0.3),
 //                new ColorPixel(new Color(128, 207, 12), 0.1),
@@ -74,7 +74,7 @@ class SamplingTask {
                 }
                 iterations++;
             }
-            if(i % 100 == 0) {
+            if (i % 100 == 0) {
                 System.out.printf("%d / %d\n", i + 1, SAMPLES);
             }
             cf = initialCf;
