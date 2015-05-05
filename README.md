@@ -18,7 +18,7 @@ This project was created as a part of [Mathematical Modelling](https://ucilnica.
 
 1. Install **Java 8** and *latest version* of **[maven](https://maven.apache.org/)**. For viewing live graphs, have [Node.js + npm](https://nodejs.org/) installed.
 2. Clone the repository or [download the zip file](https://github.com/markogresak/MM-color-wars/archive/master.zip) and `cd` to the root of this project.
-3. To start everything (web server and main program + WebSockets server), run run script [`./start.sh`](./start.sh).
+3. To start everything (web server and main program + WebSockets server), run script [`./start.sh`](./start.sh).
     - To start only main program (+ WebSockets server), run command `mvn compile test`.
     - To start web server, `cd` to `webserver/` and run `npm install && npm run-script start`.
 4. To view live graphs open [http://localhost:3000](http://localhost:3000). In order to work, this requires both main and WebSockets server running.
