@@ -9,8 +9,14 @@ function check_commands {
   fi
 }
 
-# Check for maven command.
-check_commands mvn
+# Check for maven, node and npm commands.
+check_commands mvn node npm
+
+# Run server.
+cd webserver
+npm install
+npm run-script start &
+cd $OLDPWD
 
 # Compile and run the project.
 mvn compile test
