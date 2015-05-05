@@ -1,8 +1,8 @@
 # Color Wars
 
-This project was created as a part of [Mathematical Modelling](https://ucilnica.fri.uni-lj.si/course/view.php?id=25&lang=en) course at [Faculty of Computer and Information Science, Ljubljana](http://www.fri.uni-lj.si/en/).
-
 *Color Wars* is a simulation, which takes place on a square, randomly generated field. Each iteration, a color changes to a random, not necessarily different, neighbor color. The goal was to experimentally prove hypothesis saying chances for a color to win is equal to initial share of that color on the field. We have found out that with a large sample of simulations, the ratios are getting to expected values but there are a lot of random factors at simulations, therefore we couldn't prove it for each case.
+
+This project was created as a part of [Mathematical Modelling](https://ucilnica.fri.uni-lj.si/course/view.php?id=25&lang=en) course at [Faculty of Computer and Information Science, Ljubljana](http://www.fri.uni-lj.si/en/).
 
 #### View of main window
 
