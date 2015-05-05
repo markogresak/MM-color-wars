@@ -11,7 +11,7 @@ function makeHistogram(data) {
   // CanvasJS.addColorSet('graphColors', ['#7C078E']);
   histogram = new CanvasJS.Chart('histogramContainer', {
     title: {
-      text: 'Delez cez cas'
+      text: 'Percentage over time'
     },
     colorSet: 'graphColors',
     height: 500,

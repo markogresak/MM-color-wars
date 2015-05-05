@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>MM Vojna Barv - Grafi</title>
+  <title>MM Color Wars - Graphs</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -13,7 +13,7 @@
 
   <div id="histogram-controls">
     <span>
-      <span>St. simulacij: </span>
+      <span>No. of simulations: </span>
       <select name="samples" id="samples">
         <option value="10" selected>10</option>
         <option value="25">25</option>
@@ -23,7 +23,7 @@
     </span>
 
     <span>
-      <span>Velikost: </span>
+      <span>Field size: </span>
       <select name="sizen" id="sizen">
         <option value="5">5</option>
         <option value="10">10</option>
@@ -38,11 +38,11 @@
         <option value="90">90</option>
         <option value="100">100</option>
       </select>
-      <span>[Matrika n x n]</span>
+      <span>[Field n x n]</span>
     </span>
 
     <span>
-      <span>Vzorec: </span>
+      <span>Sample interval: </span>
       <select name="sizei" id="sizei">
         <option value="1">1</option>
         <option value="5">5</option>
@@ -51,12 +51,12 @@
         <option value="50">50</option>
         <option value="100" selected>100</option>
       </select>
-      <span>[Iteracij]</span>
+      <span>[iterations]</span>
     </span>
   </div>
 
   <div id="probability" class="probability-grafi">
-    <span>Verjetnosti:</span>
+    <span>Probabilities:</span>
     <span id="values">
       <span class="value" style="border: 8px solid rgb(31, 162, 209);">0.3</span>
       <span class="value" style="border: 8px solid rgb(124, 7, 142);">0.7</span>

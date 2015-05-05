@@ -70,16 +70,16 @@ function initChart(colors) {
 
   chart = new CanvasJS.Chart('chartContainer', {
     title: {
-      text: 'Delež barv'
+      text: 'Color percentage'
     },
     colorSet: 'graphColors',
     height: 500,
     axisX: {
-      title: 'čas [iteracije]',
+      title: 'time [iterations]',
       minimum: 0
     },
     axisY: {
-      title: 'verjetnost',
+      title: 'percentage',
       minimum: 0,
       maximum: 1.0
     },
