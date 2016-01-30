@@ -50,7 +50,10 @@ public class Main {
             int iterations = 0;
             while (!cf.isAllSame()) {
                 cf = cf.updateNeighbours();
-                window.updateField(cf);
+                if (window.updateField(cf)) {
+                    System.out.println("RESET");
+                    break;
+                }
                 if (iterations % 5 == 0) {
                     ws.sendToAll(ColorPixel.colorsCountAsJSONArray(cf.getColors(), iterations, FIELD_SIZE));
                 }
