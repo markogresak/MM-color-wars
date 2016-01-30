@@ -55,7 +55,7 @@ public class Main {
                     ws.sendToAll(ColorPixel.colorsCountAsJSONArray(cf.getColors(), iterations, FIELD_SIZE));
                 }
                 iterations++;
-                Thread.sleep(20);
+                Thread.sleep(16);
             }
             System.out.printf("St iteracij: %,d\n", iterations);
             System.out.printf("Celoten cas: %.3fs\n", (System.nanoTime() - allStart) / 1e9);
